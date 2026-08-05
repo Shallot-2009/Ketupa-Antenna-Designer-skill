@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ketupa Antenna Designer"
+  short_description: "HFSS patch synthesis, scripts, plots, and S-parameter tuning"
+  default_prompt: "Use $ketupa-antenna-designer to create a parameterized HFSS rectangular patch with validated ports, plots, and automatic Touchstone export."
