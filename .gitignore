@@ -1,0 +1,16 @@
+# Generated antenna projects and solver outputs
+results/
+hfss_project/
+*.aedt
+*.aedtresults/
+*.s1p
+calibration.jsonl
+
+# Python and editor artifacts
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+
+# Local backups created by installers
+*.backup-*/
