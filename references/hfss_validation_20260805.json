@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "product_version": "1.0.0",
+  "validation_date": "2026-08-05",
+  "platform": "Windows",
+  "aedt_version": "2026.1",
+  "pyaedt_package": "ansys-aedt-core 1.3.0",
+  "author": "hongbo.li",
+  "status": "PASS",
+  "scope": "Real Ansys Electronics Desktop builds and solves, in addition to static generation tests.",
+  "cases": [
+    {
+      "backend": "VBS",
+      "feed": "probe",
+      "port": "coax_pin_T1",
+      "status": "PASS",
+      "verified_outputs": ["S11.s1p", "S11.csv", "S11.png", "RealizedGain3D.png", "RadiationPattern.csv", "RadiationPattern.png"]
+    },
+    {
+      "backend": "VBS",
+      "feed": "inset",
+      "port": "patch_T1",
+      "status": "PASS",
+      "verified_outputs": ["S11.s1p", "S11.csv", "S11.png", "RealizedGain3D.png", "RadiationPattern.csv", "RadiationPattern.png"]
+    },
+    {
+      "backend": "AEDT COM Python",
+      "feed": "probe",
+      "solution_type": "DrivenTerminal",
+      "port": "FeedPin_T1",
+      "status": "PASS",
+      "verified_outputs": ["S11.s1p", "S11.csv", "S11.png", "RealizedGain3D.png", "RadiationPattern.csv", "RadiationPattern.png"]
+    },
+    {
+      "backend": "AEDT COM Python",
+      "feed": "inset",
+      "solution_type": "DrivenModal",
+      "port": "Port1:1",
+      "status": "PASS",
+      "verified_outputs": ["S11.s1p", "S11.csv", "S11.png", "RealizedGain3D.png", "RadiationPattern.csv", "RadiationPattern.png"]
+    },
+    {
+      "backend": "PyAEDT",
+      "feed": "probe",
+      "solution_type": "Terminal",
+      "port": "Port1",
+      "status": "PASS",
+      "verified_outputs": ["S11.s1p", "S11.csv", "S11.jpg", "RealizedGain3D.jpg", "RadiationPatternPhi0.csv", "RadiationPatternPhi0.jpg", "RadiationPatternPhi90.csv", "RadiationPatternPhi90.jpg", "ParameterizedModel.jpg"]
+    },
+    {
+      "backend": "PyAEDT",
+      "feed": "edge",
+      "solution_type": "Modal",
+      "port": "Port1",
+      "status": "PASS",
+      "verified_outputs": ["S11.s1p", "S11.csv", "S11.jpg", "RealizedGain3D.jpg", "RadiationPatternPhi0.csv", "RadiationPatternPhi0.jpg", "RadiationPatternPhi90.csv", "RadiationPatternPhi90.jpg", "ParameterizedModel.jpg"]
+    }
+  ],
+  "notes": [
+    "Generated HFSS projects contain Local Variables whose defaults are produced by the deterministic design agent.",
+    "Each backend validates the excitation list before solving and fails if a port is absent.",
+    "Report image files were visually inspected and contained plotted data.",
+    "Successful full solves exported Touchstone S11 automatically."
+  ]
+}
