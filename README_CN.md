@@ -2,7 +2,8 @@
 
 Ketupa Antenna Designer 是面向 Ansys HFSS 的离线优先天线设计 Skill。它可以把中文、英文或中英混合自然语言转换为可审计的天线类型、参数和 HFSS 建模文件。
 
-作者：Asenjo.HB.L 
+作者：Asenjo.HB.L  
+
 邮箱：asenjoaupa@gmail.com  
 　　　3405802009@qq.com
 
