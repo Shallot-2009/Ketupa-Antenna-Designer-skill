@@ -8,7 +8,8 @@ Offline-first natural-language antenna recognition and Ansys HFSS starting-model
 - [HTTP API](references/API.md)
 - [Engineering and validation boundary](references/ENGINEERING.md)
 
-Author: hongbo.li  
+Author: Asenjo.HB.L  
+
 Email: asenjoaupa@gmail.com  
        3405802009@qq.com
 
