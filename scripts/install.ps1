@@ -10,15 +10,23 @@ $ErrorActionPreference = 'Stop'
 $skillName = 'ketupa-antenna-designer'
 $skillRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 
+function Get-CodexUserDestination {
+    $codexHome = [string]$env:CODEX_HOME
+    if ([string]::IsNullOrWhiteSpace($codexHome)) {
+        $codexHome = Join-Path $HOME '.codex'
+    }
+    return Join-Path ([IO.Path]::GetFullPath($codexHome)) "skills\$skillName"
+}
+
 function Get-Destinations {
     param([string]$SelectedTarget)
 
     switch ($SelectedTarget) {
-        'CodexUser'    { return ,(Join-Path $HOME ".agents\skills\$skillName") }
+        'CodexUser'    { return ,(Get-CodexUserDestination) }
         'ClaudeUser'   { return ,(Join-Path $HOME ".claude\skills\$skillName") }
         'AllUser'      {
             return @(
-                (Join-Path $HOME ".agents\skills\$skillName"),
+                (Get-CodexUserDestination),
                 (Join-Path $HOME ".claude\skills\$skillName")
             )
         }
@@ -61,13 +69,20 @@ foreach ($destination in (Get-Destinations $Target)) {
         if (-not (Test-Path -LiteralPath $binary)) {
             throw "Installation verification failed: $binary is missing"
         }
-        $reportedVersion = & $binary --version
+        $reportedVersion = (& $binary --version 2>&1) -join "`n"
         if ($reportedVersion -notmatch '1\.0\.0') {
             throw "Installation verification failed: unexpected version '$reportedVersion'"
+        }
+        $catalogText = (& $binary families 2>&1) -join "`n"
+        if ($LASTEXITCODE -ne 0) {
+            throw "Installation verification failed: the offline family catalog is unavailable.`n$catalogText"
+        }
+        $catalog = $catalogText | ConvertFrom-Json
+        if ([int]$catalog.count -ne 38 -or -not [bool]$catalog.offline) {
+            throw "Installation verification failed: expected 38 offline antenna variants."
         }
     }
     Write-Host "Installed Ketupa Antenna Designer 1.0.0 to: $destination"
 }
 
 Write-Host 'Open a new Codex task or Claude Code session so the Skill index is refreshed.'
-

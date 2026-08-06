@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "product_version": "1.0.0",
+  "created_utc": "2026-08-06T07:17:38.074483+00:00",
+  "requested_cases": 30000,
+  "executed_cases": 30000,
+  "passed": 30000,
+  "failed": 0,
+  "families": 38,
+  "generated_package_samples": 100,
+  "elapsed_seconds": 10.08279709998169,
+  "cases_per_second": 2975.3648419697424,
+  "status": "PASS",
+  "scope": "Offline English catalog routing, normalized values, exact VBS argument contracts, and sampled package generation; no HFSS solver execution.",
+  "failures": []
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "product_version": "1.0.0",
+  "created_utc": "2026-08-06T07:22:14.628095+00:00",
+  "rounds": [
+    {
+      "round": 1,
+      "seed": 20260805,
+      "requested_cases": 30000,
+      "executed_cases": 30000,
+      "passed": 30000,
+      "failed": 0,
+      "elapsed_seconds": 23.49667729999055,
+      "cases_per_second": 1276.7762699797586,
+      "maximum_resonance_error_ppm": 1.000310945187266e-07,
+      "maximum_50ohm_error": 9.999325811804738e-10,
+      "mean_resonance_error_ppm": 4.555787969096059e-08,
+      "failures": []
+    }
+  ],
+  "total_cases": 30000,
+  "total_failures": 0,
+  "status": "PASS",
+  "scope": "Analytical synthesis, bilingual parsing, VBS contracts and static backend generation; no HFSS solver was executed."
+}

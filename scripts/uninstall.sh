@@ -13,10 +13,11 @@ while [ "$#" -gt 0 ]; do
 done
 
 skill_name="ketupa-antenna-designer"
+codex_home=${CODEX_HOME:-"$HOME/.codex"}
 case "$target" in
-  codex-user) destinations="$HOME/.agents/skills/$skill_name" ;;
+  codex-user) destinations="$codex_home/skills/$skill_name" ;;
   claude-user) destinations="$HOME/.claude/skills/$skill_name" ;;
-  all-user) destinations="$HOME/.agents/skills/$skill_name
+  all-user) destinations="$codex_home/skills/$skill_name
 $HOME/.claude/skills/$skill_name" ;;
   codex-project)
     [ -n "$project_root" ] || { echo "--project-root is required" >&2; exit 2; }
@@ -38,4 +39,3 @@ printf '%s\n' "$destinations" | while IFS= read -r destination; do
     echo "Not installed: $destination"
   fi
 done
-

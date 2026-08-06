@@ -1,55 +1,48 @@
 # Engineering and Validation Boundary
 
-## Deterministic synthesis
+## Verified rectangular-patch synthesis
 
-The engine uses closed-form rectangular-patch and microstrip models, iterative resonance back-checking, continuous Hammerstad-Jensen impedance evaluation, feed-specific geometry, and optional result-driven length calibration.
+The existing engine uses closed-form rectangular-patch and microstrip models, iterative resonance back-checking, Hammerstad-Jensen impedance evaluation, feed-specific geometry, and optional result-driven length calibration.
 
-## 1,000,000-case regression
+The retained 1,000,000-case regression covered 0.3–30 GHz, relative permittivity 1.5–12, wavelength-scaled substrate thickness, probe/inset/edge feed, ABC/PML/FEBI, Chinese/English prompts, compact/standard size, resonance and 50-ohm back-checks, VBS contracts, and sampled static generation of all three backends. The machine-readable record is `validation_summary_1000000.json`.
 
-The reproducible run used seed `20260805` and covered:
+Real Windows AEDT 2026.1 checks were previously completed for VBS probe/inset, AEDT COM Python probe/inset, and PyAEDT probe/edge. Recorded cases retained a non-empty excitation list, Local Variables, an AEDT project, S11, realized gain, radiation pattern, and Touchstone output. See `hfss_validation_20260805.json`.
 
-- 0.3 to 30 GHz, log-uniform.
-- Relative permittivity 1.5 to 12.
-- Electrically scaled substrate thickness, bounded from 0.03 to 5 mm.
-- Probe, inset and edge feed.
-- ABC, PML and FEBI selections.
-- Alternating Chinese and English input.
-- Compact and standard-size requests.
-- Resonance back-check, 50-ohm line back-check, VBS argument contracts and sampled static generation of all three backends.
+The new release was compared against the prior 1.0.0 binary for the same rectangular-patch request. Dimensions, electrical data, materials, simulation settings, calibration data, warnings, and all three generated backend script hashes were identical.
 
-Result:
+## Multi-family offline catalog validation
 
-- Executed: 1,000,000.
-- Passed: 1,000,000.
-- Failed: 0.
-- Maximum analytical resonance back-check error: `1.0036416142611415e-07 ppm`.
-- Maximum 50-ohm back-check error: `9.999965300266922e-10 ohm`.
+The catalog has 38 stable family/variant keys. The 30,000-case regression used randomized frequency, permittivity, substrate thickness, helix turn/handedness, spiral/sinuous arms, and tapered-slot curve style. It checked exact family routing, normalized values, contiguous VBS argument contracts, and 100 sampled package generations.
 
-See `validation_summary_1000000.json` for the machine-readable record.
+Result: 30,000 executed, 30,000 passed, 0 failed. See `catalog_validation_30000.json`.
 
-## Real AEDT backend validation
+The Python 3.10.11 test suite also exercises every registered prompt, Chinese parameter binding, short-symbol disambiguation, every legacy package, strict port/save guards, API routes, all original rectangular-patch backends, S-parameter parsing, and calibration.
 
-Windows AEDT 2026.1 was used to build and solve representative 2.4 GHz projects:
+## What multi-family validation does not prove
 
-- VBS: probe and inset feed.
-- Native AEDT COM Python: probe and inset feed.
-- PyAEDT (`ansys-aedt-core 1.3.0`): probe and edge feed.
+No claim is made that every legacy family was solved and converged in every AEDT version. Static contract and package validation does not prove target resonance, bandwidth, efficiency, gain, pattern, mesh convergence, manufacturability, or regulatory compliance.
 
-All recorded cases retained a non-empty excitation list, exposed Local Variables, saved an AEDT project, and produced S11, realized-gain, radiation-pattern, and Touchstone files. The PyAEDT plot images were also visually checked for plotted data. The machine-readable record is `hfss_validation_20260805.json`.
+Only `rectangular_patch` is fully synthesis-and-solve verified. `legacy_synthesized` and `template_parameterized` outputs are engineering starting models.
 
-## What was not tested one million times
+## Windows compatibility boundary
 
-The suite did not run one million HFSS solves. It does not prove meshing, port validity, convergence, bandwidth, efficiency, gain, pattern, thermal behavior or manufacturability. Those require AEDT, a license, material data and engineering review.
+- Build runtime: Python 3.10.11.
+- Black-box packager: PyInstaller 5.13.2.
+- UPX: disabled.
+- API baseline target: Windows 10 and Windows Server 2016 or newer.
+- CLI/file JSON: ASCII-safe Unicode escapes; HTTP JSON: UTF-8.
+
+This establishes a static/runtime compatibility baseline on the build host. It is not a substitute for executing the final installer, AEDT version, license, and generated model on every target Windows edition.
 
 ## Final HFSS review checklist
 
-- Correct mode and port integration line.
-- Adaptive frequency located near the intended narrowband resonance.
-- Mesh and S-parameter convergence.
-- Discrete final sweep where signoff requires saved fields at each frequency.
-- Actual laminate Dk/Df versus frequency.
-- Copper thickness, roughness and finite conductivity.
-- Finite ground and enclosure effects.
-- Connector, solder and launch geometry.
-- Efficiency, realized gain and radiation pattern in addition to S11.
+- Correct geometry family and requested variant.
+- Non-empty excitation list and correct integration line/orientation.
+- Correct solution type, mode, and reference conductor.
+- Boundary distance at the lowest frequency.
+- Actual frequency-dependent Dk/Df, conductor thickness, roughness, and conductivity.
+- Adaptive mesh and S-parameter convergence.
+- Discrete final sweep when signoff requires fields at each frequency.
+- Input impedance, S11, efficiency, realized gain, and radiation pattern.
+- Enclosure, connector, solder, launch, and finite-ground effects.
 - Manufacturing tolerance and tuning allowance.

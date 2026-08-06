@@ -8,15 +8,23 @@ param(
 $ErrorActionPreference = 'Stop'
 $skillName = 'ketupa-antenna-designer'
 
+function Get-CodexUserDestination {
+    $codexHome = [string]$env:CODEX_HOME
+    if ([string]::IsNullOrWhiteSpace($codexHome)) {
+        $codexHome = Join-Path $HOME '.codex'
+    }
+    return Join-Path ([IO.Path]::GetFullPath($codexHome)) "skills\$skillName"
+}
+
 function Get-Destinations {
     param([string]$SelectedTarget)
 
     switch ($SelectedTarget) {
-        'CodexUser'    { return ,(Join-Path $HOME ".agents\skills\$skillName") }
+        'CodexUser'    { return ,(Get-CodexUserDestination) }
         'ClaudeUser'   { return ,(Join-Path $HOME ".claude\skills\$skillName") }
         'AllUser'      {
             return @(
-                (Join-Path $HOME ".agents\skills\$skillName"),
+                (Get-CodexUserDestination),
                 (Join-Path $HOME ".claude\skills\$skillName")
             )
         }
@@ -42,4 +50,3 @@ foreach ($destination in (Get-Destinations $Target)) {
         Write-Host "Removed: $destination"
     }
 }
-
