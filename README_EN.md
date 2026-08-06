@@ -2,10 +2,11 @@
 
 Ketupa Antenna Designer is an offline-first Skill for interpreting Chinese, English, or mixed antenna requirements and generating auditable Ansys HFSS starting models.
 
-Author: hongbo.li  
+Author: Asenjo.HB.L 
+
 Email: asenjoaupa@gmail.com  
        3405802009@qq.com
-
+       
 ## Contents
 
 1. [Capabilities and validation boundary](#1-capabilities-and-validation-boundary)
