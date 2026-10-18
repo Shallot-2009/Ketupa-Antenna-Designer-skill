@@ -409,3 +409,7 @@ Get-FileHash "$SkillRoot\bin\windows\ketupa-antenna.exe" -Algorithm SHA256
 - `references/PROMPT_INTERPRETER.md`
 - `references/API.md`
 - `references/ENGINEERING.md`
+
+## 12. 许可
+
+本仓库原创内容，包括 `bin/windows/ketupa-antenna.exe`、Skill 指令、脚本及文档，按 [Apache-2.0](LICENSE) 授权；可执行文件允许商业使用和再分发，许可证不要求公开其引擎源码。此前已按 BSD-2-Clause 发布的副本继续适用原授权。Ansys HFSS 等外部工具须另行取得许可。署名见 [NOTICE](NOTICE)。

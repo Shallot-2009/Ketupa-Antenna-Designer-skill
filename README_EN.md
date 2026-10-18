@@ -386,3 +386,7 @@ Additional references:
 - `references/PROMPT_INTERPRETER.md`
 - `references/API.md`
 - `references/ENGINEERING.md`
+
+## 12. License
+
+Original repository content, including `bin/windows/ketupa-antenna.exe`, Skill instructions, scripts, and documentation, is licensed under [Apache-2.0](LICENSE). The executable may be used commercially and redistributed; Apache-2.0 does not require publication of its engine source. Previously published BSD-2-Clause copies retain their original grants. Ansys HFSS and other external tools require separate licenses. See [NOTICE](NOTICE).
